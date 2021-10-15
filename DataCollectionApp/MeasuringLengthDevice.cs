@@ -21,29 +21,29 @@ namespace DataCollectionApp
         private int MostRecentMeasure;
         //creating timer to ticks.
         private Timer timerForMeasuringDevice;
-        //int array.
+
         private int[] dataCaptured;
         //event for notifying changes.
         public event PropertyChangedEventHandler PropertyChanged;
         //variable for post time of capture.
         private string timeStamp;
-        //a new queue named myQueue.
+
         Queue<int> myQueue = new Queue<int>(10);
-        //enum
+
         private Units unitToUse;
-        //accumulator.
+
         private int totalCount = 0;
         //A Full property for capturing the value that will be converted from Metric to Imperial Unit and Vice Versa
         private decimal valueConvertedToAnotherUnit;
 
-        //A Full property for units.
+ 
         public Units UnitToUse
         {
             get { return unitToUse; }
             set { unitToUse = value; }
         }
 
-        //A Full property with Getters and setters for TimeStamp
+
         public string TimeStamp
         {
             get { return timeStamp; }
