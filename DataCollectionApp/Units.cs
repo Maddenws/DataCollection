@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataCollectionApp
 {
-    //Enum for holding on to Units
+
     public enum Units
     {
         Metric, Imperial
