@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="DataCollectionApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DataCollectionApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource  AppBarBorderThemeBrush}">
+
+
+    <Grid >
+        <RadioButton  Name="rd_MetricValue" Content="Metric Value" HorizontalAlignment="Left" Margin="41,90,0,0" VerticalAlignment="Top"/>
+        <RadioButton IsChecked="True" Name="rd_ImperialValue" Content="Imperial Value" HorizontalAlignment="Left" Margin="200,90,0,0" VerticalAlignment="Top"/>
+        <Button Content="Start Collecting" Name="btn_Start" Click="Button_Start" HorizontalAlignment="Left" Margin="46,246,0,0" VerticalAlignment="Top"/>
+        <Button Content="Stop Collecting" Name="btn_Stop" Click="Button_Stop" HorizontalAlignment="Left" Margin="216,246,0,0" VerticalAlignment="Top"/>
+        <Button Content="Display Measurement History" x:Name="Button_DisplayHistory" Click="ButtonDisplayHistory" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,307,0,0"/>
+        <ListBox  BorderBrush="AliceBlue" BorderThickness="10" x:Name="listBox" HorizontalAlignment="Center" Height="288" Margin="0,415,0,0" VerticalAlignment="Top" Width="196" RenderTransformOrigin="0.477,0.498">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock x:Name="textBlock" Foreground="Green" HorizontalAlignment="Center" Text="Select Unit" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,66,0,0"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Foreground="Green" Text="Most Recent Value:" TextWrapping="Wrap" VerticalAlignment="Top" Margin="46,135,0,0"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Foreground="Green" Text="Time Stamp:" TextWrapping="Wrap" VerticalAlignment="Top" Margin="47,159,0,0"/>
+        <TextBlock x:Name="textBlock3"  HorizontalAlignment="Left" Foreground="Green" Text="MRV in Alternate Unit:" TextWrapping="Wrap" VerticalAlignment="Top" Margin="47,183,0,0"/>
+        <TextBlock x:Name="tbl_MRV" Text="{x:Bind Path=measuringLengthDevice.mostRecentMeasure,Mode=OneWay}" HorizontalAlignment="Left" Foreground="Blue" TextWrapping="Wrap" VerticalAlignment="Top" Margin="223,137,0,0"/>
+        <TextBlock x:Name="tbl_TimeStamp" Text="{x:Bind Path=measuringLengthDevice.TimeStamp,Mode=OneWay}" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Margin="223,160,0,0"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Text="{x:Bind Path=measuringLengthDevice.ValueConvertedToAnotherUnit, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="223,183,0,0"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Text="Unit Conversion:" Foreground="Green" TextWrapping="Wrap" VerticalAlignment="Top" Margin="47,207,0,0"/>
+        <TextBlock x:Name="tbl_UnitConversion" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Margin="223,207,0,0"/>
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Center" Text="Data Collector App" FontWeight="Bold" FontSize="22" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,31,0,0"/>
+        <TextBlock x:Name="counter" HorizontalAlignment="Left" Text="Total Collection:" Foreground="Green" TextWrapping="Wrap" VerticalAlignment="Top" Margin="85,365,0,0"/>
+        <TextBlock x:Name="tbl_Counter" HorizontalAlignment="Center" Text="{x:Bind Path =measuringLengthDevice.TotalCount, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,365,0,0"/>
+
+    </Grid>
+</Page>
