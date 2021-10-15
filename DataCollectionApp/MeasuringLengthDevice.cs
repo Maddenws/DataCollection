@@ -17,13 +17,13 @@ namespace DataCollectionApp
     /// 
     class MeasuringLengthDevice : Device, IMeasuringDevice, INotifyPropertyChanged
     {
-        //Declaring various variables as requirement with some extras need to use based on needs.
+
         private int MostRecentMeasure;
-        //creating timer to ticks.
+
         private Timer timerForMeasuringDevice;
 
         private int[] dataCaptured;
-        //event for notifying changes.
+
         public event PropertyChangedEventHandler PropertyChanged;
         //variable for post time of capture.
         private string timeStamp;
@@ -89,7 +89,6 @@ namespace DataCollectionApp
         //Implementing the GetRawData method of IMeasuringDevice Interface
         public int[] GetRawData()
         {
-
             //return data;
             int arraySize = 0;
             //creating an array that copys the current items in queue.
@@ -99,7 +98,6 @@ namespace DataCollectionApp
                 if (copyQueue[i] != 0)
                     //add to array size.
                     arraySize++;
-
             //New formated size so we dont return zeros if array is not stacked to max.
             int[] ReturnData = new int[arraySize];
             for (int i = 0; i < arraySize; i++)
@@ -131,8 +129,6 @@ namespace DataCollectionApp
         public decimal MetricValue()
         {
 
-            // Converting inches into cm.
-            //using math.round to round the number within 3 decimal places.
             decimal x = (decimal)(mostRecentMeasure * 2.54);
             return Math.Round(x, 3);
         }
@@ -148,23 +144,23 @@ namespace DataCollectionApp
         private async void timer_tickEnqueu(object state)
         {
 
-            //Checking to see the unit selected, if so this gets executed.
+           
             if (unitToUse == Units.Imperial)
             {
                 //Calling the RunAsync method of timer
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    //Calling the method AddingIntoStackAndCalculatingTimeStamp method
+                    
                     AddingIntoStackAndCalculatingTimeStamp();
-                    //calling our getMeasurement from device class.
+                    
                     mostRecentMeasure = GetMeasurement();
-                    //Assigning the value to valueConvertedToAnotherUnit after value conversion.
+                   
                     ValueConvertedToAnotherUnit = this.MetricValue();
-                    //adding to a accumulator so user can see how many times this has collected data.
+                   
                     TotalCount += 1;
-                    //using Queue to add the most recent measurement into a que of data.
+                    
                     myQueue.Enqueue(mostRecentMeasure);
-                    //checking the que count. At 10 it will begin to remove the oldest from the que using dequeue.
+                   
                     if (myQueue.Count >= 11)
                     {
                         myQueue.Dequeue();
@@ -172,13 +168,13 @@ namespace DataCollectionApp
 
                 });
             }
-            //Checking to see if the unit selected is imperial, if so this gets executed.
+            
             else if (unitToUse == Units.Metric)
             {
                 //Calling the RunAsync method of timer
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    //If Generated number is not zero as 0 doesn't count a real entry
+                    
 
                     //Calling the method AddingIntoStackAndCalculatingTimeStamp method
                     AddingIntoStackAndCalculatingTimeStamp();
@@ -188,9 +184,9 @@ namespace DataCollectionApp
                     mostRecentMeasure = GetMeasurement();
                     //adding to accumulator.
                     TotalCount += 1;
-                    //adding most recent measure to a queue.
+                   
                     myQueue.Enqueue(mostRecentMeasure);
-                    //once we reaches 10 values / limit. dequeue oldest item.
+                    
                     if (myQueue.Count >= 11)
                     {
                         myQueue.Dequeue();
@@ -207,10 +203,9 @@ namespace DataCollectionApp
             TimeStamp = new DateTimeOffset(DateTime.Now).ToString();
         }
 
-        //Method for StopCollecting
+        
         public void StopCollecting()
         {
-            //Setting the timer restart value to infinity which means cancelling the timers
             timerForMeasuringDevice.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
